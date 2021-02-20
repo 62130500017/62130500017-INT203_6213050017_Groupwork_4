@@ -48,7 +48,7 @@
         <i class="material-icons text-white px-5 cursor-pointer" v-on:click="toggleSearch"> 
           search
         </i>
-        <input class="rounded-none h-8 w-96 pl-2" v-show="search.searchbox" v-model.lazy="search.textinput" type="search" id="search" name="search" placeholder="ค้นหาเพลง">
+        <input class="rounded-none h-8 w-96 pl-2 focus:outline-none" v-show="search.searchbox" v-model.lazy="search.textinput" type="search" id="search" name="search" placeholder="ค้นหาเพลง">
         <button v-show="search.cancelbox" v-on:click="toggleCancel(index)"
           class="focus:outline-none border-2 border-white text-white ml-5 w-14 h-7 hover:bg-white hover:text-black transition duration-150">cancel</button>
       </div>
