@@ -20,7 +20,7 @@ const app = {
                 },
                 {
 
-                    picture_name: "name3",
+                    picture_name: "คลั่งรัก",
                     src: "/Images/คลั่งรัก.jpg",
                     fav: false,
                     fav_bor: true,
