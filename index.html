@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+
+
+<head>
+
+  <meta charset="UTF-8" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Basic Vue Js - HelloWorld App</title>
+
+
+
+  <!-- https://google.github.io/material-design-icons/#icon-font-for-the-web -->
+
+  <!-- Using via Google Web Fonts -->
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+
+
+  <!-- https://tailwindcss.com/docs/installation -->
+
+  <!-- Using Tailwind via CDN -->
+
+  <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet" />
+
+
+
+  <!-- https://v3.vuejs.org/guide/installation.html#release-notes -->
+
+  <!-- Vue CDN -->
+
+  <script src="https://unpkg.com/vue@next"></script>
+
+
+</head>
+
+
+<body class="bg-gray-800">
+  <div id="app">
+    <nav class="flex flex-wrap items-center p-5 bg-black h-20">
+      <img class="w-8" src="/Images/music_logo.svg" alt="Music_logo"/>
+      <div id="seachbar" class="flex flex-warp items-center">
+        <i class="material-icons text-white px-5 cursor-pointer" v-on:click="toggleSearch"> 
+          search
+        </i>
+        <input class="rounded-none h-8 w-96 pl-2" v-show="search.searchbox" v-model.lazy="search.textinput" type="search" id="search" name="search" placeholder="ค้นหาเพลง">
+        <button v-show="search.cancelbox" v-on:click="toggleCancel(index)"
+          class="focus:outline-none border-2 border-white text-white ml-5 w-14 h-7 hover:bg-white hover:text-black transition duration-150">cancel</button>
+      </div>
+      <p class="text-white font-semibold text-xl pl-32 absolute right-5">Music Gallery ({{countUndone}})</p>
+    </nav>
+    <div class="text-white text-xl font-bold p-5"v-if="searchInput.length == 0">
+      No Music  :(
+    </div>
+    <div class="p-10 inline-flex space-x-10 w-full">
+      <div v-for="(pic,index) in searchInput">
+        <img v-bind:src="pic.src" v-on:click="toggleZoom(index)" class="w-80 h-52 cursor-pointer">
+        <div class="inline-flex w-full">
+          <div class="w-1/2 text-gray-300 py-2 text-base">{{pic.picture_name}}</div>
+          <div class="text-right w-1/2 py-2">
+            <i v-show="pic.fav_bor" class="material-icons text-pink-600 text-2xl cursor-pointer" v-on:click="toggleHeart(index)">
+              favorite_border
+              </i>
+            <i v-show="pic.fav" class="material-icons text-pink-600 text-2xl cursor-pointer" v-on:click="toggleUnHeart(index)">
+              favorite
+            </i>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div v-show="bg_zoom.show" class="absolute left-0 top-0 h-full inline-flex w-full justify-center bg-black bg-opacity-75 items-center">
+      <div v-for="(zoompic,index) in gallery">
+        <i v-show="zoompic.close" class="material-icons text-4xl text-white cursor-pointer float-right" v-on:click="toggleCloseZoom(index)">
+          close
+        </i>
+        <img v-show="zoompic.zoom" v-bind:src="zoompic.src" class="w-5/6 h-2/3">
+      </div>
+    </div>
+  </div>
+
+
+    <!-- my main.js -->
+
+    <script src="./main.js"></script>
+
+</body>
+
+
+
+</html>
