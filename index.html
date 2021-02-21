@@ -74,7 +74,7 @@
       </div>
     </div>
     <div v-show="bg_zoom.show" class="absolute left-0 top-0 h-full inline-flex w-full justify-center bg-black bg-opacity-75 items-center">
-      <div v-for="(zoompic,index) in gallery">
+      <div v-for="(zoompic,index) in searchInput">
         <i v-show="zoompic.close" class="material-icons text-4xl text-white cursor-pointer float-right" v-on:click="toggleCloseZoom(index)">
           close
         </i>

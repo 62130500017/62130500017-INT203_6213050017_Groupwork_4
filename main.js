@@ -3,7 +3,7 @@ const app = {
         return {
             gallery: [{
                     picture_name: "รองช้ำ",
-                    src: "/Images/รองช้ำ.jpg",
+                    src: "./Images/รองช้ำ.jpg",
                     fav: false,
                     fav_bor: true,
                     zoom: false,
@@ -12,7 +12,7 @@ const app = {
                 {
 
                     picture_name: "ไม่บอกเธอ",
-                    src: "/Images/เกิดมาเพื่ออกหัก.jpg",
+                    src: "./Images/เกิดมาเพื่ออกหัก.jpg",
                     fav: false,
                     fav_bor: true,
                     zoom: false,
@@ -21,7 +21,7 @@ const app = {
                 {
 
                     picture_name: "คลั่งรัก",
-                    src: "/Images/คลั่งรัก.jpg",
+                    src: "./Images/คลั่งรัก.jpg",
                     fav: false,
                     fav_bor: true,
                     zoom: false,
@@ -42,8 +42,8 @@ const app = {
     methods: {
         toggleZoom(index) {
             this.bg_zoom.show = true
-            this.gallery[index].zoom = true
-            this.gallery[index].close = true
+            this.searchInput[index].zoom = true
+            this.searchInput[index].close = true
         },
         toggleHeart(index) {
             this.gallery[index].fav = !this.gallery[index].fav
@@ -55,10 +55,9 @@ const app = {
             
         },
         toggleCloseZoom(index) {
-            console.log(index)
             this.bg_zoom.show = false
-            this.gallery[index].zoom = false
-            this.gallery[index].close = false
+            this.searchInput[index].zoom = false
+            this.searchInput[index].close = false
         },
         toggleSearch() {
             this.search.searchbox = true
