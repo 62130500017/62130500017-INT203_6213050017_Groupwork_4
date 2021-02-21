@@ -9,8 +9,7 @@ const app = {
                     fav_bor: true,
                     zoom: false,
                     close: false,
-                    pic: true,
-                    name: true
+                    eachpic: true
                 },
                 {
 
@@ -20,8 +19,7 @@ const app = {
                     fav_bor: true,
                     zoom: false,
                     close: false,
-                    pic: true,
-                    name: true
+                    eachpic: true
                 },
                 {
 
@@ -31,8 +29,7 @@ const app = {
                     fav_bor: true,
                     zoom: false,
                     close: false,
-                    pic: true,
-                    name: true
+                    eachpic: true
                 }
             ],
 
@@ -75,22 +72,16 @@ const app = {
             this.search.cancelbox = false
             this.search.textinput = ""
             for (let i = 0; i < this.gallery.length; i++) {
-                this.gallery[i].pic = true
-                    this.gallery[i].fav_bor = true
-                    this.gallery[i].name = true
+                this.gallery[i].eachpic = true
             }
 
         },
         searchInput() {
             for (let i = 0; i < this.gallery.length; i++) {
                 if ((this.gallery[i].picture_name.toLowerCase().includes(this.search.textinput.toLowerCase())) == false) {
-                    this.gallery[i].pic = false
-                    this.gallery[i].fav_bor = false
-                    this.gallery[i].name = false
+                    this.gallery[i].eachpic = false
                 }else {
-                    this.gallery[i].pic = true
-                    this.gallery[i].fav_bor = true
-                    this.gallery[i].name = true
+                    this.gallery[i].eachpic = true
                 }
             }
         },
@@ -102,7 +93,7 @@ const app = {
             return this.gallery.filter(gallery => gallery.fav).length
         },
         filterNoFound() {
-            return this.gallery.filter(gallery => !gallery.pic).length
+            return this.gallery.filter(gallery => !gallery.eachpic).length
         }
 
     }

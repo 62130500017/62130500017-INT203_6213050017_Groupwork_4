@@ -54,14 +54,14 @@
       </div>
       <p class="text-white font-semibold text-xl pl-32 absolute right-5">Music Gallery ({{countUndone}}) {{filtersearchInput}}</p> 
     </nav>
-    <div class="text-white text-xl font-bold p-5" v-if=" filterNoFound == gallery.length">
+    <div class="text-white text-xl font-bold p-5" v-if="filterNoFound == gallery.length">
       No Music  :(
     </div>
     <div class="p-10 inline-flex space-x-10 w-full">
-      <div v-for="(pic,index) in gallery">
-        <img v-show="pic.pic" v-bind:src="pic.src" v-on:click="toggleZoom(index)" class="w-80 h-52 cursor-pointer">
+      <div v-show="pic.eachpic" v-for="(pic,index) in gallery">
+        <img  v-bind:src="pic.src" v-on:click="toggleZoom(index)" class="w-80 h-52 cursor-pointer">
         <div class="inline-flex w-full">
-          <div v-show="pic.name" class="w-1/2 text-gray-300 py-2 text-base">{{pic.picture_name}}</div>
+          <div class="w-1/2 text-gray-300 py-2 text-base">{{pic.picture_name}}</div>
           <div class="text-right w-1/2 py-2">
             <i v-show="pic.fav_bor" class="material-icons text-pink-600 text-2xl cursor-pointer" v-on:click="toggleHeart(index)">
               favorite_border
