@@ -1,13 +1,16 @@
 const app = {
     data() {
         return {
+            logo: "./Images/music_logo.svg",
             gallery: [{
                     picture_name: "รองช้ำ",
                     src: "./Images/รองช้ำ.jpg",
                     fav: false,
                     fav_bor: true,
                     zoom: false,
-                    close: false
+                    close: false,
+                    pic: true,
+                    name: true
                 },
                 {
 
@@ -16,7 +19,9 @@ const app = {
                     fav: false,
                     fav_bor: true,
                     zoom: false,
-                    close: false
+                    close: false,
+                    pic: true,
+                    name: true
                 },
                 {
 
@@ -25,10 +30,12 @@ const app = {
                     fav: false,
                     fav_bor: true,
                     zoom: false,
-                    close: false
+                    close: false,
+                    pic: true,
+                    name: true
                 }
             ],
-            
+
             search: {
                 searchbox: false,
                 cancelbox: false,
@@ -42,8 +49,8 @@ const app = {
     methods: {
         toggleZoom(index) {
             this.bg_zoom.show = true
-            this.searchInput[index].zoom = true
-            this.searchInput[index].close = true
+            this.gallery[index].zoom = true
+            this.gallery[index].close = true
         },
         toggleHeart(index) {
             this.gallery[index].fav = !this.gallery[index].fav
@@ -52,12 +59,12 @@ const app = {
         toggleUnHeart(index) {
             this.gallery[index].fav_bor = !this.gallery[index].fav_bor
             this.gallery[index].fav = !this.gallery[index].fav
-            
+
         },
         toggleCloseZoom(index) {
             this.bg_zoom.show = false
-            this.searchInput[index].zoom = false
-            this.searchInput[index].close = false
+            this.gallery[index].zoom = false
+            this.gallery[index].close = false
         },
         toggleSearch() {
             this.search.searchbox = true
@@ -67,7 +74,26 @@ const app = {
             this.search.searchbox = false
             this.search.cancelbox = false
             this.search.textinput = ""
-        }
+            for (let i = 0; i < this.gallery.length; i++) {
+                this.gallery[i].pic = true
+                    this.gallery[i].fav_bor = true
+                    this.gallery[i].name = true
+            }
+
+        },
+        searchInput() {
+            for (let i = 0; i < this.gallery.length; i++) {
+                if ((this.gallery[i].picture_name.toLowerCase().includes(this.search.textinput.toLowerCase())) == false) {
+                    this.gallery[i].pic = false
+                    this.gallery[i].fav_bor = false
+                    this.gallery[i].name = false
+                }else {
+                    this.gallery[i].pic = true
+                    this.gallery[i].fav_bor = true
+                    this.gallery[i].name = true
+                }
+            }
+        },
 
     },
 
@@ -75,8 +101,8 @@ const app = {
         countUndone() {
             return this.gallery.filter(gallery => gallery.fav).length
         },
-        searchInput() {
-            return this.gallery.filter(gallery => gallery.picture_name.toLowerCase().includes(this.search.textinput.toLowerCase()))
+        filterNoFound() {
+            return this.gallery.filter(gallery => !gallery.pic).length
         }
 
     }

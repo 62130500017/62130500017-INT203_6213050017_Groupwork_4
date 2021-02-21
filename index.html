@@ -43,25 +43,25 @@
 <body class="bg-gray-800">
   <div id="app">
     <nav class="flex flex-wrap items-center p-5 bg-black h-20">
-      <img class="w-8" src="/Images/music_logo.svg" alt="Music_logo"/>
+      <img class="w-8" v-bind:src="logo" alt="Music_logo"/>
       <div id="seachbar" class="flex flex-warp items-center">
         <i class="material-icons text-white px-5 cursor-pointer" v-on:click="toggleSearch"> 
           search
         </i>
-        <input class="rounded-none h-8 w-96 pl-2 focus:outline-none" v-show="search.searchbox" v-model.lazy="search.textinput" type="search" id="search" name="search" placeholder="ค้นหาเพลง">
+        <input v-on:keyup.enter="searchInput" class="rounded-none h-8 w-96 pl-2 focus:outline-none" v-show="search.searchbox" v-model="search.textinput" type="text" id="search" name="search" placeholder="ค้นหาเพลง">
         <button v-show="search.cancelbox" v-on:click="toggleCancel(index)"
           class="focus:outline-none border-2 border-white text-white ml-5 w-14 h-7 hover:bg-white hover:text-black transition duration-150">cancel</button>
       </div>
-      <p class="text-white font-semibold text-xl pl-32 absolute right-5">Music Gallery ({{countUndone}})</p>
+      <p class="text-white font-semibold text-xl pl-32 absolute right-5">Music Gallery ({{countUndone}}) {{filtersearchInput}}</p> 
     </nav>
-    <div class="text-white text-xl font-bold p-5"v-if="searchInput.length == 0">
+    <div class="text-white text-xl font-bold p-5" v-if=" filterNoFound == gallery.length">
       No Music  :(
     </div>
     <div class="p-10 inline-flex space-x-10 w-full">
-      <div v-for="(pic,index) in searchInput">
-        <img v-bind:src="pic.src" v-on:click="toggleZoom(index)" class="w-80 h-52 cursor-pointer">
+      <div v-for="(pic,index) in gallery">
+        <img v-show="pic.pic" v-bind:src="pic.src" v-on:click="toggleZoom(index)" class="w-80 h-52 cursor-pointer">
         <div class="inline-flex w-full">
-          <div class="w-1/2 text-gray-300 py-2 text-base">{{pic.picture_name}}</div>
+          <div v-show="pic.name" class="w-1/2 text-gray-300 py-2 text-base">{{pic.picture_name}}</div>
           <div class="text-right w-1/2 py-2">
             <i v-show="pic.fav_bor" class="material-icons text-pink-600 text-2xl cursor-pointer" v-on:click="toggleHeart(index)">
               favorite_border
@@ -74,7 +74,7 @@
       </div>
     </div>
     <div v-show="bg_zoom.show" class="absolute left-0 top-0 h-full inline-flex w-full justify-center bg-black bg-opacity-75 items-center">
-      <div v-for="(zoompic,index) in searchInput">
+      <div v-for="(zoompic,index) in gallery">
         <i v-show="zoompic.close" class="material-icons text-4xl text-white cursor-pointer float-right" v-on:click="toggleCloseZoom(index)">
           close
         </i>
